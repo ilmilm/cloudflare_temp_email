@@ -1,0 +1,30 @@
+name = "cloudflare-temp-email"
+main = "src/worker.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = [ "nodejs_compat" ]
+keep_vars = true
+
+routes = [
+  { pattern = "zhuce.houmusic1.cloudns.org", custom_domain = true },
+]
+
+[assets]
+directory = "../frontend/dist/"
+binding = "ASSETS"
+run_worker_first = true
+
+[vars]
+PREFIX = "tmp"
+DEFAULT_DOMAINS = ["houmusic1.cloudns.org"]
+DOMAINS = ["houmusic1.cloudns.org"]
+JWT_SECRET = "houmusic1-temp-mail-2026-please-use-a-long-random-secret-abc123"
+BLACK_LIST = ""
+ENABLE_USER_CREATE_EMAIL = true
+ENABLE_USER_DELETE_EMAIL = true
+ENABLE_AUTO_REPLY = false
+FRONTEND_URL = "https://zhuce.houmusic1.cloudns.org"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "cloudflare-temp-email"
+database_id = "03cc6fec-4d18-4254-bd3b-f2a1eb1ac2ad"

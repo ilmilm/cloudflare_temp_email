@@ -50,7 +50,12 @@ jobs:
           export debug_mode=${{ secrets.DEBUG_MODE }}
           export use_mail_wasm_parser=${{ secrets.BACKEND_USE_MAIL_WASM_PARSER }}
           cd worker/
-          echo '${{ secrets.BACKEND_TOML }}' > wrangler.toml
+          if [ -f wrangler.houmusic.toml ]; then
+            echo "Using repo-local wrangler.houmusic.toml"
+            cp wrangler.houmusic.toml wrangler.toml
+          else
+            echo '${{ secrets.BACKEND_TOML }}' > wrangler.toml
+          fi
           pnpm install --no-frozen-lockfile
 
           if [ -n "$use_mail_wasm_parser" ]; then
